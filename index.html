@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>PyScript Example</title>
+
+  <link rel="stylesheet" href="https://pyscript.net/latest/pyscript.css" />
+  <script defer src="https://pyscript.net/latest/pyscript.js"></script>
+</head>
+<body>
+  <h1>PyScript Greeting</h1>
+
+  <input id="username" type="text" placeholder="Enter your name" />
+  <button py-click="greet_user()">Greet</button>
+
+  <div id="greeting-output" style="margin-top: 1em; font-weight: bold;"></div>
+
+  <py-script>
+    from pyscript import Element
+
+    def greet_user():
+        name = Element("username").element.value
+        greeting = f"Hello, {name}! 👋"
+        Element("greeting-output").write(greeting)
+  </py-script>
+</body>
+</html>
+
+
+
