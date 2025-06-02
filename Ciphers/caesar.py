@@ -40,5 +40,3 @@ def crack_caesar(ciphertext):
 
 
 
-
-
