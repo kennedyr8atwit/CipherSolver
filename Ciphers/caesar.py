@@ -1,33 +1,10 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# In[ ]:
-
-
-#caesar cipher logic
-
-
-# In[15]:
-
-
-get_ipython().system('pip install nltk')
-
-
-# In[18]:
-
-
-import sys
-print(sys.executable)
-
-
-# In[10]:
-
-
-import nltk
 import string
+import nltk
 from nltk.corpus import words
 
-# Load the set of English words
+# Make sure words corpus is downloaded before running this script
+# nltk.download('words')  # Uncomment if running first time
+
 english_words = set(words.words())
 
 def caesar_decrypt(text, shift):
@@ -41,7 +18,6 @@ def caesar_decrypt(text, shift):
     return decrypted
 
 def is_valid_word(word):
-    # Remove punctuation, convert to lowercase
     word = word.strip(string.punctuation).lower()
     return word in english_words
 
@@ -59,16 +35,9 @@ def crack_caesar(ciphertext):
             max_valid_words = valid_count
             best_shift = shift
             best_decryption = decrypted
-    print("Shift:", best_shift)
-    print("Decrypted text:", best_decryption)
 
+    return best_shift, best_decryption
 
-# In[12]:
-
-
-# Example usage
-ciphertext = "Zlupvy wyvqlja slaz nv"
-crack_caesar(ciphertext)
 
 
 

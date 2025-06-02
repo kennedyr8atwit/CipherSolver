@@ -1,18 +1,20 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Run Python from HTML</title>
+    <title>Caesar Cipher Decoder</title>
 </head>
 <body>
-    <h1>Say Hello</h1>
+    <h1>Caesar Cipher Decoder</h1>
 
     <form method="POST">
-        <input type="text" name="name" placeholder="Enter your name" />
-        <button type="submit">Submit</button>
+        <label for="ciphertext">Enter cipher text:</label><br>
+        <textarea id="ciphertext" name="ciphertext" rows="5" cols="50" required></textarea><br><br>
+        <button type="submit">Decipher</button>
     </form>
 
-    {% if message %}
-        <h2>{{ message }}</h2>
+    {% if result %}
+        <h2>Result:</h2>
+        <p>{{ result|safe }}</p>
     {% endif %}
 </body>
 </html>
