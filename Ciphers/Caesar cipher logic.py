@@ -71,8 +71,5 @@ ciphertext = "Zlupvy wyvqlja slaz nv"
 crack_caesar(ciphertext)
 
 
-# In[ ]:
-
-
 
 
