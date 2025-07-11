@@ -42,13 +42,13 @@ def vigenere_decrypt(ciphertext, key):
 # In[4]:
 
 
-plaintext = "HELLO WORLD"
-key = "SENIORPROJECT"
-encrypted = vigenere_encrypt(plaintext, key)
-decrypted = vigenere_decrypt(encrypted, key)
+#plaintext = "HELLO WORLD"
+#key = "SENIORPROJECT"
+#encrypted = vigenere_encrypt(plaintext, key)
+#decrypted = vigenere_decrypt(encrypted, key)
 
-print("Encrypted:", encrypted)
-print("Decrypted:", decrypted)
+#print("Encrypted:", encrypted)
+#print("Decrypted:", decrypted)
 
 
 # In[ ]:

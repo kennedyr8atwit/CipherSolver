@@ -22,10 +22,10 @@ def atbash(text):
 # In[9]:
 
 
-text = "Svool, Dliow!"
-decrpted_text = atbash(text)
-print("Decrypted text:", cipher_text)
-print("Decrypted back:", atbash(cipher_text))
+#text = "Svool, Dliow!"
+#decrpted_text = atbash(text)
+#print("Decrypted text:", cipher_text)
+#print("Decrypted back:", atbash(cipher_text))
 
 
 # In[ ]:

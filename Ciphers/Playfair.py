@@ -110,19 +110,19 @@ def playfair_decrypt(ciphertext, key):
 # In[3]:
 
 
-key = "Senior Project"
-text = "One month left"
+#key = "Senior Project"
+#text = "One month left"
 #if double letters, split them up with an x. message into mesxsage
 #text is split into 2
 #I/J are combined
 
-print("Key:",key)
-print("Original message:",text)
-encrypted = playfair_encrypt(text, key)
-print("Encrypted:", encrypted)
+#print("Key:",key)
+#print("Original message:",text)
+#encrypted = playfair_encrypt(text, key)
+#print("Encrypted:", encrypted)
 
-decrypted = playfair_decrypt(encrypted, key)
-print("Decrypted:", decrypted)
+#decrypted = playfair_decrypt(encrypted, key)
+#print("Decrypted:", decrypted)
 
 
 # In[ ]:

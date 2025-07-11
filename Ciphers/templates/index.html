@@ -1,22 +1,170 @@
 <!DOCTYPE html>
-<html>
-<head>
-    <title>Caesar Cipher Decoder</title>
-</head>
-<body>
-    <h1>Caesar Cipher Decoder</h1>
+<html lang="en">
+    <head>
+        <title>Caesar Cipher Decoder</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+        <style>
+            body,
+            h1,
+            h2,
+            h3,
+            h4,
+            h5 {
+                font-family: "Raleway", sans-serif
+            }
 
-    <form method="POST">
-        <label for="ciphertext">Enter cipher text:</label><br>
-        <textarea id="ciphertext" name="ciphertext" rows="5" cols="50" required></textarea><br><br>
-        <button type="submit">Decipher</button>
-    </form>
+            .w3-third img {
+                margin-bottom: -6px;
+                opacity: 0.8;
+                cursor: pointer
+            }
 
-    {% if result %}
-        <h2>Result:</h2>
-        <p>{{ result|safe }}</p>
-    {% endif %}
+            .w3-third img:hover {
+                opacity: 1
+            }
+            
+            .center-form {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 50vh;
+            }
+
+            form {
+                text-align: center;
+            }
+        </style>
+    </head>
+
+<body class="w3-light-grey w3-content" style="max-width:1600px">
+
+    <!-- Sidebar/menu -->
+    <nav class="w3-sidebar w3-bar-block w3-white w3-animate-left w3-text-grey w3-collapse w3-top w3-center"
+        style="z-index:3;width:300px;font-weight:bold" id="mySidebar"><br>
+        <h3 class="w3-padding-64 w3-center"><b>CIPHER<br>SOLVER</b></h3>
+        <a href="javascript:void(0)" onclick="w3_close()"
+            class="w3-bar-item w3-button w3-padding w3-hide-large">Close</a>
+        <a href="#" onclick="w3_close()" class="w3-bar-item w3-button">INTRODUCTION</a>
+        <a href="#caesar" onclick="w3_close()" class="w3-bar-item w3-button">CAESAR CIPHER DECODER</a>
+        <a href="#atbash" onclick="w3_close()" class="w3-bar-item w3-button">ATBASH CIPHER DECODER</a>
+        <a href="#vigenere" onclick="w3_close()" class="w3-bar-item w3-button">VIGENÈRE CIPHER DECODER</a>
+        <a href="#playfair" onclick="w3_close()" class="w3-bar-item w3-button">PLAYFAIR CIPHER DECODER</a>
+
+    </nav>
+
+    <header class="w3-container w3-top w3-hide-large w3-white w3-xlarge w3-padding-16">
+        <span class="w3-left w3-padding">CIPHER SOLVER</span>
+        <a href="javascript:void(0)" class="w3-right w3-button w3-white" onclick="w3_open()">☰</a>
+    </header>
+
+    <div class="w3-overlay w3-hide-large w3-animate-opacity" onclick="w3_close()" style="cursor:pointer"
+    title="close side menu" id="myOverlay"></div>
+
+    <!-- main body-->
+    <!-- intro section-->
+    <div class="w3-main" style="margin-left:300px">
+        <h1>Introduction</h1>
+        <p></p> 
+    </div>
+
+
+    <div class="w3-main" style="margin-left:300px">
+        <h1 id="caesar">Caesar Cipher Decoder</h1>
+        <form method="POST">
+            <label>Enter cipher text:</label><br>
+            <textarea name="ciphertext" rows="4" cols="60" required></textarea><br>
+            <button type="submit" name="action" value="caesar">Decipher with Caesar</button>
+        </form>
+
+        {% if caesar_result %}
+            <div style="margin-top: 10px; background-color: #f0f0f0; padding: 10px;">
+                <h3>Caesar Result:</h3>
+                <p>{{ caesar_result|safe }}</p>
+            </div>
+        {% endif %}
+
+        <hr>
+
+        <h1 id="atbash">Atbash Cipher Decoder</h1>
+        <form method="POST">
+            <label>Enter cipher text:</label><br>
+            <textarea name="ciphertext" rows="4" cols="60" required></textarea><br>
+            <button type="submit" name="action" value="atbash">Decipher with Atbash</button>
+        </form>
+
+        {% if atbash_result %}
+            <div style="margin-top: 10px; background-color: #f0f0f0; padding: 10px;">
+                <h3>Atbash Result:</h3>
+                <p>{{ atbash_result|safe }}</p>
+            </div>
+        {% endif %}
+
+        <hr>
+
+        <h1 id="vigenere">Vigenère Cipher Decoder</h1>
+        <form method="POST">
+            <label>Text:</label><br>
+            <textarea name="ciphertext" rows="4" cols="60" required></textarea><br>
+            <label>Key:</label><br>
+            <input type="text" name="key" required><br><br>
+            <button type="submit" name="action" value="vigenere_encrypt">Encrypt</button>
+            <button type="submit" name="action" value="vigenere_decrypt">Decrypt</button>
+        </form>
+
+        {% if vigenere_result %}
+            <div style="margin-top: 10px; background-color: #f0f0f0; padding: 10px;">
+                <h3>Vigenère Result:</h3>
+                <p>{{ vigenere_result|safe }}</p>
+            </div>
+        {% endif %}
+
+        
+        <h1 id="playfair">Playfair Cipher Decoder</h1>
+        <form method="POST">
+            <label>Text:</label><br>
+            <textarea name="ciphertext" rows="4" cols="60" required></textarea><br>
+            <label>Key:</label><br>
+            <input type="text" name="key" required><br><br>
+            <button type="submit" name="action" value="playfair_encrypt">Encrypt</button>
+            <button type="submit" name="action" value="playfair_decrypt">Decrypt</button>
+        </form>
+
+        {% if playfair_result %}
+            <div style="margin-top: 10px; background-color: #f0f0f0; padding: 10px;">
+                <h3>Playfair Result:</h3>
+                <p>{{ playfair_result|safe }}</p>
+            </div>
+        {% endif %}
+    
+    </div>
+
+    <script>
+        // Script to open and close sidebar
+        function w3_open() {
+            document.getElementById("mySidebar").style.display = "block";
+            document.getElementById("myOverlay").style.display = "block";
+        }
+
+        function w3_close() {
+            document.getElementById("mySidebar").style.display = "none";
+            document.getElementById("myOverlay").style.display = "none";
+        }
+
+        // Modal Image Gallery
+        function onClick(element) {
+            document.getElementById("img01").src = element.src;
+            document.getElementById("modal01").style.display = "block";
+            var captionText = document.getElementById("caption");
+            captionText.innerHTML = element.alt;
+        }
+
+    </script>
+
 </body>
+
 </html>
 
 
