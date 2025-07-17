@@ -5,22 +5,16 @@
 
 
 import re
-import base64
 import numpy as np
 
 
 # In[2]:
 
 
-def detect_possible_ciphers(ciphertext, keys=None, matrices=None):
-    keys = keys or []
-    matrices = matrices or []
-
-    # Normalize ciphertext
+def detect_possible_ciphers(ciphertext, num_keys=0, num_matrices=0):
     cleaned_text = re.sub(r'[^A-Z]', '', ciphertext.upper())
 
-    # Define all ciphers we are evaluating
-    all_ciphers = {
+    cipher_list = {
         "Caesar",
         "Vigenère",
         "Atbash",
@@ -34,67 +28,58 @@ def detect_possible_ciphers(ciphertext, keys=None, matrices=None):
     possible = set()
     ruled_out = set()
 
-    # --- Base64 Detection ---
     if is_base64(ciphertext):
         possible.add("Base64")
-        ruled_out |= (all_ciphers - {"Base64"})
+        ruled_out |= (cipher_list - {"Base64"})
         return sorted(possible), sorted(ruled_out)
 
-    # --- Cipher Rules ---
-
-    for cipher in all_ciphers:
+    for cipher in cipher_list:
         if cipher == "Caesar":
-            if not keys:
-                ruled_out.add("Caesar")
-            elif len(keys) == 1 and isinstance(keys[0], str) and len(keys[0]) == 1:
+            if num_keys == 1:
                 possible.add("Caesar")
             else:
                 ruled_out.add("Caesar")
 
         elif cipher == "Vigenère":
-            if not keys:
-                ruled_out.add("Vigenère")
-            elif len(keys) == 1 and isinstance(keys[0], str) and len(keys[0]) > 1:
+            if num_keys == 1:
                 possible.add("Vigenère")
             else:
                 ruled_out.add("Vigenère")
 
         elif cipher == "Atbash":
-            if keys or matrices:
-                ruled_out.add("Atbash")
-            else:
+            if num_keys == 0 and num_matrices == 0:
                 possible.add("Atbash")
+            else:
+                ruled_out.add("Atbash")
 
         elif cipher == "Playfair":
-            if matrices and len(matrices) == 1:
+            if num_matrices == 1:
                 possible.add("Playfair")
             else:
                 ruled_out.add("Playfair")
 
         elif cipher == "Hill":
-            if matrices and len(matrices) == 1:
+            if num_matrices == 1:
                 possible.add("Hill")
             else:
                 ruled_out.add("Hill")
 
         elif cipher == "Affine":
-            if keys and isinstance(keys[0], tuple) and len(keys[0]) == 2:
+            if num_keys == 1:
                 possible.add("Affine")
             else:
                 ruled_out.add("Affine")
 
         elif cipher == "Four-Square":
-            if matrices and len(matrices) == 2:
+            if num_matrices == 2:
                 possible.add("Four-Square")
             else:
                 ruled_out.add("Four-Square")
 
         elif cipher == "Base64":
-            ruled_out.add("Base64")  # already handled above
+            ruled_out.add("Base64")
 
     return sorted(possible), sorted(ruled_out)
-
-# --- Utilities ---
 
 def is_base64(text):
     try:
@@ -104,16 +89,11 @@ def is_base64(text):
         return False
 
 
-# In[5]:
+# In[3]:
 
 
-# --- Example Usage ---
-
-ct1 = "KHOOR ZRUOG"
-keys1 = []
-matrices1 = ["D"]
-
-possible, ruled_out = detect_possible_ciphers(ct1, keys1, matrices1)
+ciphertext = "KHOOR ZRUOG"
+possible, ruled_out = detect_possible_ciphers(ciphertext, num_keys=2, num_matrices=2)
 print("Possible Ciphers:", possible)
 print("Ruled Out Ciphers:", ruled_out)
 
