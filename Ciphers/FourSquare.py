@@ -90,16 +90,16 @@ def four_square_decrypt(ciphertext, key1, key2):
 
 
 # === Example usage ===
-key1 = "example"
-key2 = "potato"
-show_four_squares_2x2(key1, key2)
+#key1 = "example"
+#key2 = "potato"
+#show_four_squares_2x2(key1, key2)
 
-plaintext = "senior project"
-cipher = four_square_encrypt(plaintext, key1, key2)
-decrypted = four_square_decrypt(cipher, key1, key2)
+#plaintext = "senior project"
+#cipher = four_square_encrypt(plaintext, key1, key2)
+#decrypted = four_square_decrypt(cipher, key1, key2)
 
-print("Encrypted:", cipher)
-print("Decrypted:", decrypted)
+#print("Encrypted:", cipher)
+#print("Decrypted:", decrypted)
 
 
 # In[ ]:

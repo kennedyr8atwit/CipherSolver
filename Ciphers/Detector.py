@@ -5,8 +5,7 @@
 
 
 import re
-import numpy as np
-
+import base64
 
 # In[2]:
 
