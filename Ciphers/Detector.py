@@ -91,10 +91,10 @@ def is_base64(text):
 # In[3]:
 
 
-ciphertext = "KHOOR ZRUOG"
-possible, ruled_out = detect_possible_ciphers(ciphertext, num_keys=2, num_matrices=2)
-print("Possible Ciphers:", possible)
-print("Ruled Out Ciphers:", ruled_out)
+#ciphertext = "KHOOR ZRUOG"
+#possible, ruled_out = detect_possible_ciphers(ciphertext, num_keys=2, num_matrices=2)
+#print("Possible Ciphers:", possible)
+#print("Ruled Out Ciphers:", ruled_out)
 
 
 # In[ ]:

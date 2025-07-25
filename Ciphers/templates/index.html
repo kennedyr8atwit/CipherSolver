@@ -1,240 +1,288 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <title>Caesar Cipher Decoder</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
-        <style>
-            body,
-            h1,
-            h2,
-            h3,
-            h4,
-            h5 {
-                font-family: "Raleway", sans-serif
-            }
+<head>
+    <title>Cipher Solver</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+    <style>
+        body, h1, h2, h3, h4, h5 {
+            font-family: "Raleway", sans-serif
+        }
 
-            .w3-third img {
-                margin-bottom: -6px;
-                opacity: 0.8;
-                cursor: pointer
-            }
+        .w3-third img {
+            margin-bottom: -6px;
+            opacity: 0.8;
+            cursor: pointer
+        }
 
-            .w3-third img:hover {
-                opacity: 1
-            }
-            
-            .center-form {
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                height: 50vh;
-            }
+        .w3-third img:hover {
+            opacity: 1
+        }
 
-            form {
-                text-align: center;
-            }
-        </style>
-    </head>
+        form {
+            text-align: left;
+        }
+
+        textarea, input[type="text"], input[type="number"] {
+            width: 100%;
+        }
+    </style>
+</head>
 
 <body class="w3-light-grey w3-content" style="max-width:1600px">
 
-    <!-- Sidebar/menu -->
-    <nav class="w3-sidebar w3-bar-block w3-white w3-animate-left w3-text-grey w3-collapse w3-top w3-center"
-        style="z-index:3;width:300px;font-weight:bold" id="mySidebar"><br>
-        <h3 class="w3-padding-64 w3-center"><b>CIPHER<br>SOLVER</b></h3>
-        <a href="javascript:void(0)" onclick="w3_close()"
-            class="w3-bar-item w3-button w3-padding w3-hide-large">Close</a>
-        <a href="#" onclick="w3_close()" class="w3-bar-item w3-button">INTRODUCTION</a>
-        <a href="#cipher_detector" onclick="w3_close()" class="w3-bar-item w3-button">CIPHER DETECTOR</a>
-        <a href="#caesar" onclick="w3_close()" class="w3-bar-item w3-button">CAESAR CIPHER</a>
-        <a href="#atbash" onclick="w3_close()" class="w3-bar-item w3-button">ATBASH CIPHER</a>
-        <a href="#vigenere" onclick="w3_close()" class="w3-bar-item w3-button">VIGENÈRE CIPHER</a>
-        <a href="#playfair" onclick="w3_close()" class="w3-bar-item w3-button">PLAYFAIR CIPHER</a>
-        <a href="#foursquare" onclick="w3_close()" class="w3-bar-item w3-button">FOUR SQUARE CIPHER</a>
-    </nav>
+<!-- Sidebar/menu -->
+<nav class="w3-sidebar w3-bar-block w3-white w3-animate-left w3-text-grey w3-collapse w3-top w3-center"
+    style="z-index:3;width:300px;font-weight:bold" id="mySidebar"><br>
+    <h3 class="w3-padding-64 w3-center"><b>CIPHER<br>SOLVER</b></h3>
+    <a href="javascript:void(0)" onclick="w3_close()" class="w3-bar-item w3-button w3-padding w3-hide-large">Close</a>
+    <a href="#" onclick="w3_close()" class="w3-bar-item w3-button">INTRODUCTION</a>
+    <a href="#cipher_detector" onclick="w3_close()" class="w3-bar-item w3-button">CIPHER DETECTOR</a>
+    <a href="#caesar" onclick="w3_close()" class="w3-bar-item w3-button">CAESAR CIPHER</a>
+    <a href="#atbash" onclick="w3_close()" class="w3-bar-item w3-button">ATBASH CIPHER</a>
+    <a href="#vigenere" onclick="w3_close()" class="w3-bar-item w3-button">VIGENÈRE CIPHER</a>
+    <a href="#playfair" onclick="w3_close()" class="w3-bar-item w3-button">PLAYFAIR CIPHER</a>
+    <a href="#foursquare" onclick="w3_close()" class="w3-bar-item w3-button">FOUR SQUARE CIPHER</a>
+</nav>
 
-    <header class="w3-container w3-top w3-hide-large w3-white w3-xlarge w3-padding-16">
-        <span class="w3-left w3-padding">CIPHER SOLVER</span>
-        <a href="javascript:void(0)" class="w3-right w3-button w3-white" onclick="w3_open()">☰</a>
-    </header>
+<header class="w3-container w3-top w3-hide-large w3-white w3-xlarge w3-padding-16">
+    <span class="w3-left w3-padding">CIPHER SOLVER</span>
+    <a href="javascript:void(0)" class="w3-right w3-button w3-white" onclick="w3_open()">☰</a>
+</header>
 
-    <div class="w3-overlay w3-hide-large w3-animate-opacity" onclick="w3_close()" style="cursor:pointer"
-    title="close side menu" id="myOverlay"></div>
+<div class="w3-overlay w3-hide-large w3-animate-opacity" onclick="w3_close()" style="cursor:pointer"
+title="close side menu" id="myOverlay"></div>
 
-    <!-- main body-->
-    <!-- intro section-->
-    <div class="w3-main" style="margin-left:300px">
-        <h1>Introduction</h1>
-        <p></p> 
-    </div>
+<div class="w3-main" style="margin-left:300px">
 
-            <h1 id="cipher_detector">Detect Cipher</h1>
-        <form method="POST">
-            <label for="ciphertext">Ciphertext:</label>
-            <input type="text" name="ciphertext" required><br><br>
+    <!-- Cipher Detector -->
+    <div class="w3-container w3-padding-32" id="cipher_detector">
+        <h1>Detect Cipher</h1>
+        <form method="POST" class="w3-card w3-padding w3-white">
+            <label>Ciphertext:</label>
+            <input class="w3-input w3-border" type="text" name="ciphertext" required><br>
 
-            <label for="num_keys">Number of Keys:</label>
-            <input type="number" name="num_keys" value="0" min="0" required>
+            <div class="w3-row-padding">
+                <div class="w3-half">
+                    <label>Number of Keys:</label>
+                    <input class="w3-input w3-border" type="number" name="num_keys" value="0" min="0" required>
+                </div>
+                <div class="w3-half">
+                    <label>Number of Matrices:</label>
+                    <input class="w3-input w3-border" type="number" name="num_matrices" value="0" min="0" required>
+                </div>
+            </div><br>
 
-            <label for="num_matrices" style="margin-left: 1em;">Number of Matrices:</label>
-            <input type="number" name="num_matrices" value="0" min="0" required><br><br>
-
-            <button type="submit" name="action" value="detect_ciphers">Detect Possible Ciphers</button>
+            <button class="w3-button w3-blue w3-margin-top" type="submit" name="action" value="detect_ciphers">Detect Possible Ciphers</button>
         </form>
 
         {% if detection_result %}
-            <div class="result" style="white-space: pre-wrap; margin-top: 1em;">
-                <strong>Possible Ciphers:</strong>
-                <ul>
-                    {% for cipher in detection_result.possible %}
-                        <li>{{ cipher }}</li>
-                    {% endfor %}
-                </ul>
-                <strong>Ruled Out Ciphers:</strong>
-                <ul>
-                    {% for cipher in detection_result.ruled_out %}
-                        <li>{{ cipher }}</li>
-                    {% endfor %}
-                </ul>
-            </div>
+        <div class="w3-panel w3-light-grey w3-margin-top">
+            <strong>Possible Ciphers:</strong>
+            <ul>
+                {% for cipher in detection_result.possible %}
+                    <li>{{ cipher }}</li>
+                {% endfor %}
+            </ul>
+            <strong>Ruled Out Ciphers:</strong>
+            <ul>
+                {% for cipher in detection_result.ruled_out %}
+                    <li>{{ cipher }}</li>
+                {% endfor %}
+            </ul>
+        </div>
         {% endif %}
-        
-    <div class="w3-main" style="margin-left:300px">
-        <h1 id="caesar">Caesar Cipher</h1>
-        <form method="POST">
+    </div>
+
+    <!-- Caesar Cipher -->
+    <div class="w3-container w3-padding-32" id="caesar">
+        <h1>Caesar Cipher</h1>
+        <p>
+            The Caesar cipher is arguably the most well known cipher in existence. This cipher is one of many considered to be a
+            substitution cipher, where each letter in the original message (also known as the plaintext) is replaced with a letter
+            corresponding to a certain number of letters shifted up or down in the alphabet (resulting in the ciphertext).
+            <br><br>
+            This method was created and implemented by none other than <strong>Julius Caesar</strong>, who used this cipher to send
+            messages to his troops. Since the Caesar cipher is bound to whatever language you’re using it with, it is extremely
+            vulnerable to brute force attacks.
+            <br><br>
+            For instance, in the English language, you can only shift the language 27 times before you end up back at the beginning.
+            This means the <strong>keyspace</strong> (number of possible encryptions) for the Caesar cipher is 27. As such, a brute
+            force method would have the solution within 27 attempts.
+        </p>
+        <form method="POST" class="w3-card w3-padding w3-white">
             <label>Enter cipher text:</label><br>
-            <textarea name="ciphertext" rows="4" cols="60" required></textarea><br>
-            <button type="submit" name="action" value="caesar">Decipher with Caesar</button>
+            <textarea class="w3-input w3-border" name="ciphertext" rows="4" required></textarea><br>
+            <button class="w3-button w3-blue" type="submit" name="action" value="caesar">Decipher with Caesar</button>
         </form>
 
         {% if caesar_result %}
-            <div style="margin-top: 10px; background-color: #f0f0f0; padding: 10px;">
-                <h3>Caesar Result:</h3>
-                <p>{{ caesar_result|safe }}</p>
-            </div>
+        <div class="w3-panel w3-light-grey w3-margin-top">
+            <h3>Caesar Result:</h3>
+            <p>{{ caesar_result|safe }}</p>
+        </div>
         {% endif %}
+    </div>
 
-        <hr>
-
-        <h1 id="atbash">Atbash Cipher</h1>
-        <form method="POST">
+    <!-- Atbash Cipher -->
+    <div class="w3-container w3-padding-32" id="atbash">
+        <h1>Atbash Cipher</h1>
+        <p>
+            The Atbash cipher is considered to be one of the simplest ciphers available. This cipher works by simply reversing the alphabet
+            (i.e., A → Z, B → Y, etc.). As such, the Atbash cipher is a <strong>simple substitution cipher</strong>.
+            <br><br>
+            Since this cipher is well known, it is considered extremely easy to crack. It is quite old, and as such, it is no longer known
+            who originally created it or when. It is known, however, that its intended initial use was with the Hebrew alphabet. This is also
+            where the Atbash cipher derives its name from.
+        </p>
+        <form method="POST" class="w3-card w3-padding w3-white">
             <label>Enter cipher text:</label><br>
-            <textarea name="ciphertext" rows="4" cols="60" required></textarea><br>
-            <button type="submit" name="action" value="atbash">Decipher with Atbash</button>
+            <textarea class="w3-input w3-border" name="ciphertext" rows="4" required></textarea><br>
+            <button class="w3-button w3-blue" type="submit" name="action" value="atbash">Decipher with Atbash</button>
         </form>
 
         {% if atbash_result %}
-            <div style="margin-top: 10px; background-color: #f0f0f0; padding: 10px;">
-                <h3>Atbash Result:</h3>
-                <p>{{ atbash_result|safe }}</p>
-            </div>
+        <div class="w3-panel w3-light-grey w3-margin-top">
+            <h3>Atbash Result:</h3>
+            <p>{{ atbash_result|safe }}</p>
+        </div>
         {% endif %}
+    </div>
 
-        <hr>
-
-        <h1 id="vigenere">Vigenère Cipher</h1>
-        <form method="POST">
-            <label>Text:</label><br>
-            <textarea name="ciphertext" rows="4" cols="60" required></textarea><br>
-            <label>Key:</label><br>
-            <input type="text" name="key" required><br><br>
-            <button type="submit" name="action" value="vigenere_encrypt">Encrypt</button>
-            <button type="submit" name="action" value="vigenere_decrypt">Decrypt</button>
+    <!-- Vigenère Cipher -->
+    <div class="w3-container w3-padding-32" id="vigenere">
+        <h1>Vigenère Cipher</h1>
+        <p>
+            The Vigenère cipher is a more complex cipher as opposed to Atbash or Caesar. While this cipher was originally described by Giovan Battista Bellaso,
+            it's more often accredited to 16th-century mathematician <strong>Blaise de Vigenère</strong> (from whom the cipher's name later came).
+            <br><br>
+            Vigenère's goal when creating this cipher was to add a twist on the Caesar Cipher by making it more impervious to frequency analysis.
+            He accomplished this by implementing a word or phrase that acted as a key. You would loop through this phrase, with each letter correlating
+            to a different letter alphabet shift.
+            <br><br>
+            This made it considerably safer than the Caesar cipher, and at the time, it was almost impossible to crack without that passphrase.
+            In the modern day, however, the Vigenère cipher has become vulnerable to frequency analysis and brute force attacks.
+        </p>
+        <form method="POST" class="w3-card w3-padding w3-white">
+            <label>Text:</label>
+            <textarea class="w3-input w3-border" name="ciphertext" rows="4" required></textarea><br>
+            <label>Key:</label>
+            <input class="w3-input w3-border" type="text" name="key" required><br><br>
+            <button class="w3-button w3-green" type="submit" name="action" value="vigenere_encrypt">Encrypt</button>
+            <button class="w3-button w3-blue" type="submit" name="action" value="vigenere_decrypt">Decrypt</button>
         </form>
 
         {% if vigenere_result %}
-            <div style="margin-top: 10px; background-color: #f0f0f0; padding: 10px;">
-                <h3>Vigenère Result:</h3>
-                <p>{{ vigenere_result|safe }}</p>
-            </div>
+        <div class="w3-panel w3-light-grey w3-margin-top">
+            <h3>Vigenère Result:</h3>
+            <p>{{ vigenere_result|safe }}</p>
+        </div>
         {% endif %}
+    </div>
 
-        <h1 id="playfair">Playfair Cipher</h1>
-        <form method="POST">
-            <label>Text:</label><br>
-            <textarea name="ciphertext" rows="4" cols="60" required></textarea><br>
-            <label>Key:</label><br>
-            <input type="text" name="key" required><br><br>
-            <button type="submit" name="action" value="playfair_encrypt">Encrypt</button>
-            <button type="submit" name="action" value="playfair_decrypt">Decrypt</button>
+    <!-- Playfair Cipher -->
+    <div class="w3-container w3-padding-32" id="playfair">
+        <h1>Playfair Cipher</h1>
+        <p>
+            Created in the 1800s by Charles Wheatstone, the Playfair cipher is one of the earliest diagram substitution ciphers. 
+            Like the Four Square cipher, it encrypts pairs of letters (called <strong>bigrams</strong>), but it requires only 
+            <strong>one key and a single 5x5 matrix</strong>.
+            <br><br>
+            The keyword is used to populate the matrix—starting with the letters in the key (no repeats), followed by the remaining letters of the alphabet 
+            (often omitting Q or combining I and J). To encrypt a message, the following three rules are applied to each bigram:
+        </p>
+        <ol>
+            <li>If the two letters are in the same row: replace each with the letter to its immediate right (wrap around to the left if at the end).</li>
+            <li>If the two letters are in the same column: replace each with the letter immediately below it (wrap around to the top if at the bottom).</li>
+            <li>If the two letters form the corners of a rectangle: replace them with the letters on the opposite corners of the rectangle (same row as original).</li>
+        </ol>
+        <p>
+            Decryption reverses the process. Although it could be cracked by guessing likely keywords, the Playfair cipher was 
+            <strong>used in both World War I and World War II</strong> to encrypt messages—though not for the most top-secret communications.
+        </p>
+        <form method="POST" class="w3-card w3-padding w3-white">
+            <label>Text:</label>
+            <textarea class="w3-input w3-border" name="ciphertext" rows="4" required></textarea><br>
+            <label>Key:</label>
+            <input class="w3-input w3-border" type="text" name="key" required><br><br>
+            <button class="w3-button w3-green" type="submit" name="action" value="playfair_encrypt">Encrypt</button>
+            <button class="w3-button w3-blue" type="submit" name="action" value="playfair_decrypt">Decrypt</button>
         </form>
 
         {% if playfair_result %}
-            <div style="margin-top: 10px; background-color: #f0f0f0; padding: 10px;">
-                <h3>Playfair Result:</h3>
-                <p>{{ playfair_result|safe }}</p>
-
-                {% if playfair_matrix %}
-                    <h4>Matrix:</h4>
-                    <table style="border-collapse: collapse;">
-                        {% for row in playfair_matrix %}
-                            <tr>
-                                {% for cell in row %}
-                                    <td style="border: 1px solid #999; padding: 5px; width: 25px; text-align: center;">{{ cell }}</td>
-                                {% endfor %}
-                            </tr>
-                        {% endfor %}
-                    </table>
-                {% endif %}
-            </div>
+        <div class="w3-panel w3-light-grey w3-margin-top">
+            <h3>Playfair Result:</h3>
+            <p>{{ playfair_result|safe }}</p>
+            {% if playfair_matrix %}
+                <h4>Matrix:</h4>
+                <table class="w3-table-all w3-small">
+                    {% for row in playfair_matrix %}
+                        <tr>
+                            {% for cell in row %}
+                                <td>{{ cell }}</td>
+                            {% endfor %}
+                        </tr>
+                    {% endfor %}
+                </table>
+            {% endif %}
+        </div>
         {% endif %}
+    </div>
 
-        
-        <h1 id="foursquare">FourSquare Cipher</h1>
-        <form method="POST">
-            <label for="key1">Key 1:</label>
-            <input type="text" name="key1" required>
-            <label for="key2">Key 2:</label>
-            <input type="text" name="key2" required><br><br>
+    <!-- Four Square Cipher -->
+    <div class="w3-container w3-padding-32" id="foursquare">
+        <h1>Four Square Cipher</h1>
+        <p>
+            The Four Square cipher is what's known as a <strong>polygraphic substitution cipher</strong>, encrypting pairs of letters (known as digraphs)
+            instead of individual letters. It separates itself from simpler ciphers by utilizing <strong>two different keys</strong>.
+            <br><br>
+            Created by Felix Delastelle in the 1800s, this cipher is more resilient to frequency analysis than simple substitution ciphers.
+            It uses <strong>four 5x5 matrices</strong>—often omitting the letter Q or J. The top-left and bottom-right matrices are standard alphabets,
+            while the top-right and bottom-left matrices are generated using keywords.
+            <br><br>
+            For example, if the key is “Mouse,” the matrix begins with the letters in “mouse,” followed by the rest of the alphabet, skipping letters already used.
+            When arranged into a 2x2 square grid, these matrices enable encryption of digraphs by using diagonally opposite corners in the cipher grid.
+            <br><br>
+            Compared to other classical ciphers, the Four Square cipher is one of the most secure and time-consuming. However, like all classical ciphers,
+            it is not considered secure in the modern day, as modern computers can break it relatively easily.
+        </p>
+        <form method="POST" class="w3-card w3-padding w3-white">
+            <label>Key 1:</label>
+            <input class="w3-input w3-border" type="text" name="key1" required>
+            <label>Key 2:</label>
+            <input class="w3-input w3-border" type="text" name="key2" required><br><br>
 
-            <label for="plaintext">Plaintext:</label>
-            <input type="text" name="plaintext">
-            <button type="submit" name="action" value="foursquare_encrypt">Encrypt</button><br><br>
+            <label>Plaintext:</label>
+            <input class="w3-input w3-border" type="text" name="plaintext">
+            <button class="w3-button w3-green" type="submit" name="action" value="foursquare_encrypt">Encrypt</button><br><br>
 
-            <label for="ciphertext">Ciphertext:</label>
-            <input type="text" name="ciphertext">
-            <button type="submit" name="action" value="foursquare_decrypt">Decrypt</button><br><br>
+            <label>Ciphertext:</label>
+            <input class="w3-input w3-border" type="text" name="ciphertext">
+            <button class="w3-button w3-blue" type="submit" name="action" value="foursquare_decrypt">Decrypt</button><br><br>
 
-            <button type="submit" name="action" value="show_foursquare">Show Cipher Squares</button>
+            <button class="w3-button w3-grey" type="submit" name="action" value="show_foursquare">Show Cipher Squares</button>
         </form>
 
         {% if foursquare_result %}
-            <div class="result" style="white-space: pre-wrap;">{{ foursquare_result|safe }}</div>
-        {% endif %}    
+        <div class="w3-panel w3-light-grey w3-margin-top">
+            <p>{{ foursquare_result|safe }}</p>
+        </div>
+        {% endif %}
     </div>
+</div>
 
-    <script>
-        // Script to open and close sidebar
-        function w3_open() {
-            document.getElementById("mySidebar").style.display = "block";
-            document.getElementById("myOverlay").style.display = "block";
-        }
+<script>
+    function w3_open() {
+        document.getElementById("mySidebar").style.display = "block";
+        document.getElementById("myOverlay").style.display = "block";
+    }
 
-        function w3_close() {
-            document.getElementById("mySidebar").style.display = "none";
-            document.getElementById("myOverlay").style.display = "none";
-        }
-
-        // Modal Image Gallery
-        function onClick(element) {
-            document.getElementById("img01").src = element.src;
-            document.getElementById("modal01").style.display = "block";
-            var captionText = document.getElementById("caption");
-            captionText.innerHTML = element.alt;
-        }
-
-    </script>
-
+    function w3_close() {
+        document.getElementById("mySidebar").style.display = "none";
+        document.getElementById("myOverlay").style.display = "none";
+    }
+</script>
 </body>
-
 </html>
-
-
-
-
-
-
-
